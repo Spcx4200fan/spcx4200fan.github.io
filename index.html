@@ -655,8 +655,6 @@ document.querySelectorAll('[data-poster]').forEach(function(el){var u=D[el.getAt
   }
   function start(){
     if(on) return; on = true; userOff = false; chip.classList.add('live');
-    var block = document.querySelector('.snd-head');
-    if(block) block.scrollIntoView({behavior:'smooth', block:'center'});
     label('♪ FINAL FRONTIER');
     later(chapter, 700);
   }
