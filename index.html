@@ -132,6 +132,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);-w
 .mission-chip{border:1px dashed rgba(43,255,136,.45);border-radius:8px;padding:13px 15px;font-family:var(--mono);font-size:.76rem;line-height:1.7;color:#cfdae4}
 .mission-chip b{color:var(--green)}
 
+/* soundtrack */
+.snd-head{margin-top:34px}
+.snd-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+.snd-cell iframe{width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:10px;display:block;background:#000}
+.snd-cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:8px}
+.snd-cap b{color:var(--green)}
+@media(max-width:760px){.snd-grid{grid-template-columns:1fr}}
+
 /* sound chip */
 #snd-chip{position:fixed;right:18px;bottom:18px;z-index:60;font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);background:rgba(3,6,9,.72);border:1px solid rgba(43,255,136,.5);border-radius:999px;padding:11px 18px;cursor:pointer;backdrop-filter:blur(6px);transition:.2s}
 #snd-chip:hover{border-color:var(--green);transform:translateY(-2px)}
@@ -333,6 +341,16 @@ footer .founder b{color:#dbe5ee}
           <a class="btn btn-ghost" href="https://www.spacex.com/launches" target="_blank" rel="noopener">spacex.com/launches</a>
           <p style="font-size:.8rem;color:var(--faint)">NASA briefs its Artemis III Moon update today too — it airs on the NASA TV screen on the left.</p>
         </div>
+      </div>
+      <div class="snd-head rv">
+        <div class="fk2" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;color:var(--green);text-transform:uppercase">The Soundtrack · The Masters</div>
+        <p style="color:var(--dim);font-size:.9rem;margin-top:8px">The music that inspires this house — official videos, played via YouTube. Our own entrance score (tap anywhere on the page) was composed in their spirit.</p>
+      </div>
+      <div class="snd-grid">
+        <div class="snd-cell rv"><iframe src="https://www.youtube-nocookie.com/embed/JuSsvM8B4Jc" title="Cornfield Chase — Hans Zimmer" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Cornfield Chase</b> · Hans Zimmer · Interstellar — WaterTower Music</div></div>
+        <div class="snd-cell rv"><iframe src="https://www.youtube-nocookie.com/embed/UgkvcWx8oXw" title="Day One — Hans Zimmer" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Day One</b> · Hans Zimmer · Interstellar — WaterTower Music</div></div>
+        <div class="snd-cell rv"><iframe src="https://www.youtube-nocookie.com/embed/G6SeQrnSc90" title="Final Frontier — Thomas Bergersen" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Final Frontier</b> · Thomas Bergersen · Sun</div></div>
+        <div class="snd-cell rv"><iframe src="https://www.youtube-nocookie.com/embed/aIDrEvJ8zq8" title="Creation of Earth — Thomas Bergersen" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Creation of Earth</b> · Thomas Bergersen · Sun — Two Steps From Hell</div></div>
       </div>
     </div>
   </section>
