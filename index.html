@@ -343,14 +343,14 @@ footer .founder b{color:#dbe5ee}
         </div>
       </div>
       <div class="snd-head rv">
-        <div class="fk2" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;color:var(--green);text-transform:uppercase">The Soundtrack · The Masters</div>
-        <p style="color:var(--dim);font-size:.9rem;margin-top:8px">The music that inspires this house — official videos, played via YouTube. Our own entrance score (tap anywhere on the page) was composed in their spirit.</p>
+        <div class="fk2" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;color:var(--green);text-transform:uppercase">The Anthem · Final Frontier</div>
+        <p style="color:var(--dim);font-size:.9rem;margin-top:8px">One anthem for this house — Thomas Bergersen's Final Frontier, official video via YouTube. Tap anywhere on this page and the ritual plays it the captain's way: ten seconds, a breath, then again. The other masters are below for full listening. Our synth score is retired.</p>
       </div>
       <div class="snd-grid">
-        <div class="snd-cell rv"><iframe src="https://www.youtube-nocookie.com/embed/JuSsvM8B4Jc" title="Cornfield Chase — Hans Zimmer" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Cornfield Chase</b> · Hans Zimmer · Interstellar — WaterTower Music</div></div>
-        <div class="snd-cell rv"><iframe src="https://www.youtube-nocookie.com/embed/UgkvcWx8oXw" title="Day One — Hans Zimmer" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Day One</b> · Hans Zimmer · Interstellar — WaterTower Music</div></div>
-        <div class="snd-cell rv"><iframe src="https://www.youtube-nocookie.com/embed/G6SeQrnSc90" title="Final Frontier — Thomas Bergersen" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Final Frontier</b> · Thomas Bergersen · Sun</div></div>
-        <div class="snd-cell rv"><iframe src="https://www.youtube-nocookie.com/embed/aIDrEvJ8zq8" title="Creation of Earth — Thomas Bergersen" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Creation of Earth</b> · Thomas Bergersen · Sun — Two Steps From Hell</div></div>
+        <div class="snd-cell rv"><iframe id="sndp0" src="https://www.youtube-nocookie.com/embed/G6SeQrnSc90?enablejsapi=1&rel=0&playsinline=1" title="Final Frontier — Thomas Bergersen" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>★ Final Frontier</b> · Thomas Bergersen · Sun — The Anthem</div></div>
+        <div class="snd-cell rv"><iframe id="sndp1" src="https://www.youtube-nocookie.com/embed/JuSsvM8B4Jc" title="Cornfield Chase — Hans Zimmer" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Cornfield Chase</b> · Hans Zimmer · Interstellar — WaterTower Music</div></div>
+        <div class="snd-cell rv"><iframe id="sndp2" src="https://www.youtube-nocookie.com/embed/UgkvcWx8oXw" title="Day One — Hans Zimmer" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Day One</b> · Hans Zimmer · Interstellar — WaterTower Music</div></div>
+        <div class="snd-cell rv"><iframe id="sndp3" src="https://www.youtube-nocookie.com/embed/aIDrEvJ8zq8" title="Creation of Earth — Thomas Bergersen" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="snd-cap"><b>Creation of Earth</b> · Thomas Bergersen · Sun — Two Steps From Hell</div></div>
       </div>
     </div>
   </section>
@@ -616,7 +616,6 @@ footer .founder b{color:#dbe5ee}
 
 <script src="data1.js"></script>
 <script src="data2.js"></script>
-<script src="data3.js"></script>
 <script>
 (function(){var D=Object.assign({},window.SPCX_D1||{},window.SPCX_D2||{});
 document.querySelectorAll('[data-asset]').forEach(function(el){var u=D[el.getAttribute('data-asset')];if(!u)return;
@@ -625,58 +624,49 @@ document.querySelectorAll('[data-poster]').forEach(function(el){var u=D[el.getAt
 })();
 </script>
 
-<button id="snd-chip" type="button" aria-label="Toggle site sound">🔊 Tap for sound</button>
+<button id="snd-chip" type="button" aria-label="Play the anthem">▶ Play Final Frontier</button>
 <script>
 (function(){
-  var D = window.SPCX_D3 || {};
-  function src(k){ return D[k] || k; }
-  var TRACKS = [
-    {k:'audio/frontier.mp3',  name:'FRONTIER'},
-    {k:'audio/deepfield.mp3', name:'DEEP FIELD'},
-    {k:'audio/docking.mp3',   name:'DOCKING'},
-    {k:'audio/stay.mp3',      name:'STAY'}
-  ];
   var chip = document.getElementById('snd-chip');
-  var au = new Audio(); au.preload = 'auto'; au.volume = 0;
-  var motif = new Audio(); motif.src = src('audio/motif42.mp3'); motif.volume = 0.42;
-  var on = false, started = false, userOff = false, idx = 0, timers = [];
+  var player = null, ready = false;
+  var on = false, userOff = false, timers = [];
   function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
   function clearTimers(){ timers.forEach(clearTimeout); timers = []; }
-  function fade(a, to, ms, done){
-    var from = a.volume, t0 = performance.now();
-    (function step(t){ var p = Math.min(1, (t - t0) / ms); a.volume = from + (to - from) * p;
-      if(p < 1) requestAnimationFrame(step); else if(done) done(); })(t0);
-  }
   function label(t){ chip.textContent = t; }
-  function playTheme(){
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+  window.onYouTubeIframeAPIReady = function(){
+    player = new YT.Player('sndp0', { events: {
+      onReady: function(){ ready = true; },
+      onStateChange: function(e){ if(window.YT && e.data === YT.PlayerState.ENDED){ stop(); } }
+    }});
+  };
+  function chapter(){
     if(!on) return;
-    var tr = TRACKS[idx % TRACKS.length]; idx++;
-    au.src = src(tr.k); au.currentTime = 0; au.volume = 0;
-    au.play().catch(function(){});
-    label('♪ ' + tr.name + ' · Sound on');
-    fade(au, 0.4, 1500);
-    later(function(){ fade(au, 0, 1200, function(){ au.pause(); }); }, 10000);
-    later(function(){ if(on) label('🔊 Sound on'); }, 11400);
-    later(playTheme, 26500);
+    if(player && ready){ player.playVideo(); label('♪ FINAL FRONTIER'); }
+    later(function(){ if(player && ready) player.pauseVideo(); if(on) label('▶ Final Frontier · breathing'); }, 10000);
+    later(chapter, 22000);
   }
   function start(){
-    if(started) return; started = true; on = true; userOff = false;
-    chip.classList.add('live');
-    label('♪ 42');
-    motif.currentTime = 0; motif.play().catch(function(){});
-    later(playTheme, 5200);
+    if(on) return; on = true; userOff = false; chip.classList.add('live');
+    var block = document.querySelector('.snd-head');
+    if(block) block.scrollIntoView({behavior:'smooth', block:'center'});
+    label('♪ FINAL FRONTIER');
+    later(chapter, 700);
   }
   function stop(){
-    on = false; started = false; userOff = true; clearTimers();
-    fade(au, 0, 300, function(){ au.pause(); });
-    motif.pause(); chip.classList.remove('live'); label('🔊 Tap for sound');
+    on = false; userOff = true; clearTimers();
+    if(player && ready) player.pauseVideo();
+    chip.classList.remove('live'); label('▶ Play Final Frontier');
   }
   chip.addEventListener('click', function(){ on ? stop() : start(); });
-  function wake(e){ if(e && e.target === chip) return; if(!started && !userOff) start(); }
+  function wake(e){ if(e && e.target === chip) return; if(!on && !userOff) start(); }
   window.addEventListener('pointerdown', wake);
   window.addEventListener('keydown', wake);
 })();
 </script>
+
 </body>
 </html>
 
