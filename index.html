@@ -119,6 +119,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);-w
 .cnum .n{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
 .cnum .u{font-family:var(--mono);font-size:.62rem;letter-spacing:.34em;color:var(--faint);text-transform:uppercase;margin-top:9px}
 
+/* live deck */
+.live-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:22px}
+@media(max-width:860px){.live-grid{grid-template-columns:1fr}}
+.live-frame{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid var(--line2);background:#000}
+.live-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff3b30;margin-right:8px;box-shadow:0 0 0 0 rgba(255,59,48,.6);animation:pulse 1.6s infinite;vertical-align:middle}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,59,48,.55)}70%{box-shadow:0 0 0 9px rgba(255,59,48,0)}100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}}
+.live-side{padding:30px 28px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.live-side h3{font-size:1.3rem;text-transform:uppercase}
+.live-side p{color:var(--dim);font-size:.92rem}
+.mission-chip{border:1px dashed rgba(43,255,136,.45);border-radius:8px;padding:13px 15px;font-family:var(--mono);font-size:.76rem;line-height:1.7;color:#cfdae4}
+.mission-chip b{color:var(--green)}
+
 /* why / contract */
 .fact-list{list-style:none;margin-top:8px}
 .fact-list li{padding:15px 0;border-bottom:1px dashed var(--line);display:flex;gap:14px;align-items:baseline}
@@ -288,6 +301,31 @@ footer .founder b{color:#dbe5ee}
           <div class="cnum"><div class="n" id="cd-h">--</div><div class="u">Hours</div></div>
           <div class="cnum"><div class="n" id="cd-m">--</div><div class="u">Minutes</div></div>
           <div class="cnum"><div class="n" id="cd-s">--</div><div class="u">Seconds</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIVE DECK ============ -->
+  <section id="live">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="kicker"><span class="live-dot"></span>Live From The Real Sky</div>
+        <h2>Mission TV</h2>
+        <p class="sub">Official coverage, straight from the source. NASA TV streams around the clock; SpaceX flies its launch broadcasts live on X. The fleet watches the real sky from here.</p>
+      </div>
+      <div class="live-grid">
+        <div class="live-frame rv">
+          <iframe src="https://www.youtube.com/embed/live_stream?channel=UCLA_DiR1FfKNvjuUpBHmylQ" title="NASA TV — official live stream" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="panel live-side rv">
+          <div class="fk2" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;color:var(--green);text-transform:uppercase">SpaceX · Official Coverage</div>
+          <h3>Launches Live on X</h3>
+          <p>Every SpaceX launch — countdown, liftoff, landing — streams live on the official SpaceX account. Mission pages and the full manifest live on spacex.com.</p>
+          <div class="mission-chip"><b>TODAY</b> · STARLINK 15-15 — Falcon 9 · Vandenberg SLC-4E · Window opens 2:30 PM PT · Booster B1063, flight Nº 36</div>
+          <a class="btn btn-green" href="https://x.com/SpaceX" target="_blank" rel="noopener">Watch SpaceX on X</a>
+          <a class="btn btn-ghost" href="https://www.spacex.com/launches" target="_blank" rel="noopener">spacex.com/launches</a>
+          <p style="font-size:.8rem;color:var(--faint)">NASA briefs its Artemis III Moon update today too — it airs on the NASA TV screen on the left.</p>
         </div>
       </div>
     </div>
