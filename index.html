@@ -132,6 +132,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);-w
 .mission-chip{border:1px dashed rgba(43,255,136,.45);border-radius:8px;padding:13px 15px;font-family:var(--mono);font-size:.76rem;line-height:1.7;color:#cfdae4}
 .mission-chip b{color:var(--green)}
 
+/* sound chip */
+#snd-chip{position:fixed;right:18px;bottom:18px;z-index:60;font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);background:rgba(3,6,9,.72);border:1px solid rgba(43,255,136,.5);border-radius:999px;padding:11px 18px;cursor:pointer;backdrop-filter:blur(6px);transition:.2s}
+#snd-chip:hover{border-color:var(--green);transform:translateY(-2px)}
+#snd-chip:not(.live){animation:chipPulse 2.2s infinite}
+@keyframes chipPulse{0%{box-shadow:0 0 0 0 rgba(43,255,136,.35)}70%{box-shadow:0 0 0 10px rgba(43,255,136,0)}100%{box-shadow:0 0 0 0 rgba(43,255,136,0)}}
+
 /* why / contract */
 .fact-list{list-style:none;margin-top:8px}
 .fact-list li{padding:15px 0;border-bottom:1px dashed var(--line);display:flex;gap:14px;align-items:baseline}
@@ -592,11 +598,65 @@ footer .founder b{color:#dbe5ee}
 
 <script src="data1.js"></script>
 <script src="data2.js"></script>
+<script src="data3.js"></script>
 <script>
 (function(){var D=Object.assign({},window.SPCX_D1||{},window.SPCX_D2||{});
 document.querySelectorAll('[data-asset]').forEach(function(el){var u=D[el.getAttribute('data-asset')];if(!u)return;
 if(el.tagName==='SOURCE'){var v=el.closest('video');if(v){v.src=u;v.load();}}else{el.src=u;}});
 document.querySelectorAll('[data-poster]').forEach(function(el){var u=D[el.getAttribute('data-poster')];if(u)el.poster=u;});
+})();
+</script>
+
+<button id="snd-chip" type="button" aria-label="Toggle site sound">🔊 Tap for sound</button>
+<script>
+(function(){
+  var D = window.SPCX_D3 || {};
+  function src(k){ return D[k] || k; }
+  var TRACKS = [
+    {k:'audio/frontier.mp3',  name:'FRONTIER'},
+    {k:'audio/deepfield.mp3', name:'DEEP FIELD'},
+    {k:'audio/docking.mp3',   name:'DOCKING'},
+    {k:'audio/stay.mp3',      name:'STAY'}
+  ];
+  var chip = document.getElementById('snd-chip');
+  var au = new Audio(); au.preload = 'auto'; au.volume = 0;
+  var motif = new Audio(); motif.src = src('audio/motif42.mp3'); motif.volume = 0.42;
+  var on = false, started = false, userOff = false, idx = 0, timers = [];
+  function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
+  function clearTimers(){ timers.forEach(clearTimeout); timers = []; }
+  function fade(a, to, ms, done){
+    var from = a.volume, t0 = performance.now();
+    (function step(t){ var p = Math.min(1, (t - t0) / ms); a.volume = from + (to - from) * p;
+      if(p < 1) requestAnimationFrame(step); else if(done) done(); })(t0);
+  }
+  function label(t){ chip.textContent = t; }
+  function playTheme(){
+    if(!on) return;
+    var tr = TRACKS[idx % TRACKS.length]; idx++;
+    au.src = src(tr.k); au.currentTime = 0; au.volume = 0;
+    au.play().catch(function(){});
+    label('♪ ' + tr.name + ' · Sound on');
+    fade(au, 0.4, 1500);
+    later(function(){ fade(au, 0, 1200, function(){ au.pause(); }); }, 10000);
+    later(function(){ if(on) label('🔊 Sound on'); }, 11400);
+    later(playTheme, 26500);
+  }
+  function start(){
+    if(started) return; started = true; on = true; userOff = false;
+    chip.classList.add('live');
+    label('♪ 42');
+    motif.currentTime = 0; motif.play().catch(function(){});
+    later(playTheme, 5200);
+  }
+  function stop(){
+    on = false; started = false; userOff = true; clearTimers();
+    fade(au, 0, 300, function(){ au.pause(); });
+    motif.pause(); chip.classList.remove('live'); label('🔊 Tap for sound');
+  }
+  chip.addEventListener('click', function(){ on ? stop() : start(); });
+  function wake(e){ if(e && e.target === chip) return; if(!started && !userOff) start(); }
+  window.addEventListener('pointerdown', wake);
+  window.addEventListener('keydown', wake);
 })();
 </script>
 </body>
