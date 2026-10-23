@@ -146,6 +146,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);-w
 #snd-chip:not(.live){animation:chipPulse 2.2s infinite}
 @keyframes chipPulse{0%{box-shadow:0 0 0 0 rgba(43,255,136,.35)}70%{box-shadow:0 0 0 10px rgba(43,255,136,0)}100%{box-shadow:0 0 0 0 rgba(43,255,136,0)}}
 
+/* anthem strip */
+.anthem-strip{margin-top:26px;font-family:var(--mono);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--green);border:1px solid rgba(43,255,136,.45);background:rgba(3,6,9,.55);padding:11px 20px;border-radius:999px;animation:hero-up 1.1s cubic-bezier(.2,.8,.2,1) both .55s}
+.anthem-strip b{color:#fff}
+
 /* why / contract */
 .fact-list{list-style:none;margin-top:8px}
 .fact-list li{padding:15px 0;border-bottom:1px dashed var(--line);display:flex;gap:14px;align-items:baseline}
@@ -288,6 +292,7 @@ footer .founder b{color:#dbe5ee}
       <a class="btn btn-ghost" href="https://dexscreener.com/ethereum/0xa17f383786cf2241affe41b130d8c373fdb34574" target="_blank" rel="noopener">Buy / Chart</a>
       <a class="btn btn-ghost" href="https://x.com/spcx4200fan" target="_blank" rel="noopener">Follow on X</a>
     </div>
+    <div class="anthem-strip">★ The Anthem · <b>Final Frontier</b> — Thomas Bergersen · Tap anywhere: it plays</div>
     <div class="hero-scroll">Scroll · Don't Panic</div>
   </header>
 
