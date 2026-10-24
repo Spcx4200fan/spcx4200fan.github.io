@@ -181,6 +181,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);-w
 .rung .flag{margin-left:auto;font-family:var(--mono);font-size:.66rem;letter-spacing:.24em;color:var(--ember);text-transform:uppercase}
 @media(max-width:640px){.rung .amt{min-width:0}.rung .flag{display:none}}
 
+/* the signal — story archive */
+.saga-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.saga-grid{grid-template-columns:1fr}}
+.ep-card{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:26px 26px 22px;transition:.25s;position:relative;display:block}
+.ep-card:hover{transform:translateY(-5px);border-color:rgba(43,255,136,.55);box-shadow:0 22px 44px rgba(0,0,0,.55)}
+.ep-card .no{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--green);text-transform:uppercase}
+.ep-card h3{font-size:1.3rem;text-transform:uppercase;letter-spacing:.04em;margin-top:8px}
+.ep-card p{color:var(--dim);font-size:.92rem;margin-top:7px;line-height:1.55}
+.ep-card .watch{margin-top:14px;font-family:var(--mono);font-size:.66rem;letter-spacing:.26em;color:var(--faint);text-transform:uppercase}
+.ep-card:hover .watch{color:var(--green)}
+.clue-file{margin-top:18px;border:1px dashed rgba(43,255,136,.4);border-radius:10px;padding:20px 24px;background:rgba(43,255,136,.04)}
+.clue-file .no{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--green);text-transform:uppercase}
+.clue-file p{color:var(--dim);font-size:.92rem;margin-top:8px;line-height:1.6}
+.clue-file b{color:#e8f2ec}
+.next-ep{margin-top:18px;border:1px solid var(--line);border-radius:10px;padding:20px 24px;background:var(--panel)}
+.next-ep .no{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--green);text-transform:uppercase}
+.next-ep p{color:var(--dim);font-size:.92rem;margin-top:8px;line-height:1.6}
+.next-ep b{color:#e8f2ec}
+
 /* films */
 .film-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 @media(max-width:1020px){.film-grid{grid-template-columns:repeat(2,1fr)}}
@@ -267,6 +286,7 @@ footer .founder b{color:#dbe5ee}
       <a href="#why">Why 4200</a>
       <a href="#ladder">The Ladder</a>
       <a href="#films">Films</a>
+      <a href="#signal">The Signal</a>
       <a href="#sky">Real Sky</a>
       <a href="#board">Board</a>
       <a class="nav-cta" href="https://t.me/+TPUr4oS8IMk2N2Nh" target="_blank" rel="noopener">Join the Mothership</a>
@@ -408,6 +428,39 @@ footer .founder b{color:#dbe5ee}
         <div class="rung"><div class="box"></div><div class="amt">$4.2B</div><div class="tag">Flag 3</div><div class="flag">🚩 Flag 3</div></div>
         <div class="rung"><div class="box"></div><div class="amt">42</div><div class="tag">The Answer</div><div class="flag">The Answer</div></div>
         <div class="rung"><div class="box"></div><div class="amt">TRILLION</div><div class="tag">Fan lore · Prophecy tier</div><div class="flag">Don't Panic</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE SIGNAL — STORY ARCHIVE ============ -->
+  <section id="signal">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="kicker">The Serial · Season 1 — The Earth That Lied</div>
+        <h2>The Signal — The Story So Far</h2>
+        <p class="sub">A story told in episodes, clues and premieres. New here? Start at Episode 1 and watch the dots connect — every detail is a clue, and the puzzle is bigger than it looks. Episodes premiere in the Mothership first, then fly on X.</p>
+      </div>
+      <div class="saga-grid">
+        <a class="ep-card rv" href="https://x.com/Spcx4200fan/status/2113936221693177987" target="_blank" rel="noopener">
+          <div class="no">Episode 1 · 2 min</div>
+          <h3>The City That Forgot the Sun</h3>
+          <p>District 42, 2094. The rain never stopped and the oxygen is rationed — and tonight a machine that should not exist wakes in the flood, whispering: don't let him build the rocket.</p>
+          <div class="watch">Watch Episode 1 on X →</div>
+        </a>
+        <a class="ep-card rv" href="https://x.com/Spcx4200fan/status/2114053854761554279" target="_blank" rel="noopener">
+          <div class="no">Episode 2 · 2 min</div>
+          <h3>The Empty Chair</h3>
+          <p>Dr. Voss predicted 41 disappearances — then he became the 42nd. A locked room, a chair still warm, three numbers on a board… and a photograph that cannot exist.</p>
+          <div class="watch">Watch Episode 2 on X →</div>
+        </a>
+      </div>
+      <div class="clue-file rv">
+        <div class="no">The Case File — Clues Pinned So Far</div>
+        <p><b>4200 / 42 / 0</b> — the numbers circled on Voss's board. · <b>The green circle</b> that appears in the puddles. · <b>03:17</b> — the clock that stopped. · <b>A child's counting rhyme</b> that always stops at 41. · Missed one? Rewatch — the dots were planted to be found. Theories live in the Mothership.</p>
+      </div>
+      <div class="next-ep rv">
+        <div class="no">Next — Episode 3 · The Red Envelope</div>
+        <p>The envelope knows a name it shouldn't. <b>Premieres in the Mothership first.</b> Don't Panic.</p>
       </div>
     </div>
   </section>
